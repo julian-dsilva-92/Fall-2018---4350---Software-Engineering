@@ -7,14 +7,6 @@ public class Adder extends UnicastRemoteObject implements AddServerInterface {
         super();
     }
 
-    public String hello(String userName) {
-        return "Hello "+ userName +"!";
-    }
-
-    public int squareNums(int rootNum) {
-        return rootNum*rootNum;
-    }
-
     public String sendQuery(FrontendQuery[] frontendQueryFields) {
         StringBuilder queryResults = new StringBuilder();
         StringBuilder queryAsString = new StringBuilder("select ");
@@ -23,24 +15,7 @@ public class Adder extends UnicastRemoteObject implements AddServerInterface {
         // select all fields
         queryAsString.append("*");
 
-        // select only data fields that client specified
-//
-//        // appending selected data fields to query
-//        for(FrontendQuery dataField : frontendQueryFields) {
-//            if(!isFirst) {
-//                queryAsString
-//                        .append(", ")
-//                        .append(dataField.getQueryFieldName());
-//            } else {
-//                queryAsString
-//                        .append(dataField.getQueryFieldName());
-//            }
-//            isFirst = false;
-//        }
-//
-//        // appending from clause to query
-
-
+        // appending from clause to query
         queryAsString.append(" from `user-data` where ");
 
         // appending where clause values
@@ -86,16 +61,6 @@ public class Adder extends UnicastRemoteObject implements AddServerInterface {
                         .append(rs.getString("jobTitle"))
                         .append("\n");
             }
-
-            // to return selected data fields only
-//            while(rs.next()) {
-//                for(FrontendQuery dataField : frontendQueryFields) {
-//                    queryResults
-//                            .append(rs.getString(dataField.getQueryFieldName()))
-//                            .append("\t\t\t");
-//                }
-//                queryResults.append("\n");
-//            }
 
         } catch (Exception e) {
             e.printStackTrace();
